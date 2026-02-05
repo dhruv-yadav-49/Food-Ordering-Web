@@ -9,6 +9,9 @@ const homeRouter = require("./routes/homeRoutes")
 app.use("/",homeRouter);
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+
+const authRoutes=require("./routes/authRoutes.js")
+app.use("/auth",authRoutes);
 
 module.exports = {app};
