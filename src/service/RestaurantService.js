@@ -1,8 +1,11 @@
+const Restaurant = require("../models/restaurant.model.js");
+const Address = require("../models/address.model.js");
+
 module.exports={
 
-    async createRestaurant(req,res){
+    async createRestaurant(req,user){
         try {
-            const address=new address({
+            const address=new Address({
                 city:req.address.city,
                 country:req.address.country,
                 fullName:req.address.fullName,
@@ -13,10 +16,10 @@ module.exports={
 
             const savedAddress=await address.save();
 
-            const restaurant=new restaurant({
+            const restaurant=new Restaurant({
                 address:savedAddress,
                 contactInformation:req.contactInformation,
-                cuisine:req.cuisineType,
+                cuisineType:req.cuisineType,
                 description:req.description,
                 images:req.images,
                 name:req.name,
@@ -36,7 +39,7 @@ module.exports={
 
     async findRestaurantById(restaurantId){
         try{
-            const restaurant=await restaurant.findById(restaurantId);
+            const restaurant=await Restaurant.findById(restaurantId);
             if(!restaurant) throw new Error("Restaurant not found");
             return restaurant;
         }catch (error){
@@ -46,8 +49,8 @@ module.exports={
 
     async deleteRestaurant(restaurantId){
         try{
-            this.findRestaurantById(restaurantId);
-            await restaurant.findByIdAndDelete(restaurantId);
+            await this.findRestaurantById(restaurantId);
+            await Restaurant.findByIdAndDelete(restaurantId);
         }
         catch(error){
             throw new Error(error.message);
@@ -56,7 +59,7 @@ module.exports={
 
     async getAllRestaurants(){
         try{
-            const restaurants=await restaurant.find();
+            const restaurants=await Restaurant.find();
             return restaurants;
         }
         catch (error){
@@ -64,9 +67,9 @@ module.exports={
         }
     },
 
-    async getResturantByUserId(userId){
+    async getRestaurantByUserId(userId){
         try{
-            const restaurant=await restaurant.findOne({owner:userId}).populate('owner').populate("address");
+            const restaurant=await Restaurant.findOne({owner:userId}).populate('owner').populate("address");
 
             if(!restaurant) throw new Error("Restaurant not found");
             return restaurant;
@@ -95,10 +98,10 @@ module.exports={
         }
     },
 
-    async addToFavorite(restaurantId,user){
+    async addToFavorites(restaurantId,user){
 
         try{
-            const restaurant = this.findRestaurantById(restaurantId);
+            const restaurant = await this.findRestaurantById(restaurantId);
 
             const dto={
                 _id:restaurant._id,
@@ -108,7 +111,7 @@ module.exports={
             }
 
             const favorites=user.favorites || [];
-            const index=favorites.findIndex(favorites=>favorites._id===restaurantId);
+            const index=favorites.findIndex(favorite=>favorite._id.toString() === restaurantId.toString());
 
             if(index!==-1){
                 favorites.splice(index,1);
