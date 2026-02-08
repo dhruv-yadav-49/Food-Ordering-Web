@@ -105,7 +105,7 @@ module.exports={
 
             const dto={
                 _id:restaurant._id,
-                title:restaurant.name,
+                name:restaurant.name,
                 images:restaurant.images,
                 description:restaurant.description
             }

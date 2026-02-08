@@ -9,10 +9,12 @@ const OrderSchema=mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"Restaurant",
     },
-    Items:{
+    items:[
+        {
         type: mongoose.Schema.Types.ObjectId,
         ref:"OrderItem",
-    },
+        }
+    ],
     orderStatus:String,
     totalAmount:Number,
     totalItem:Number,

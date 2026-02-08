@@ -1,4 +1,4 @@
-const { generateToken } = require("../models/jwtProvider");
+const { generateToken } = require("../config/jwtProvider");
 const userService = require("../service/userService");
 const bcrypt = require("bcrypt");
 
