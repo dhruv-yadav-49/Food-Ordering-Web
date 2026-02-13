@@ -1,6 +1,6 @@
 const Restaurant = require("../models/restaurant.model.js");
 const Food = require("../models/food.model.js");
-const { populate } = require("../models/user.model");
+
 
 module.exports = {
         async createFood(req, restaurant){
