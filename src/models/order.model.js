@@ -30,7 +30,6 @@ const OrderSchema=mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"Payment",
     },
-    totalItem:Number,
     totalPrice: Number,
 })
 

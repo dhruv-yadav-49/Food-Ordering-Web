@@ -1,6 +1,6 @@
 const { default: mongoose } = require("mongoose");
 
-const mongodbUrl = "mongodb+srv://codewithDhruv:codewithDhruvYadav@cluster3.dhhaxsn.mongodb.net/?appName=Cluster3";
+const mongodbUrl = process.env.MONGO_URI;
 
 
 async function connectDb() {

@@ -1,24 +1,23 @@
 const mongoose = require("mongoose");
-const { register } = require("../controllers/authController");
 
 const RestaurantSchema=mongoose.Schema({
     owner: {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"users"
+        ref:"User"
     },
     name:String,
     description:String,
     cuisineType:String,
     address:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:"address"
+        ref:"Address"
     },
     contactInformation:{},
     openingHours: String,
     orders:[
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Oder"
+            ref: "Order"
         }
     ],
     images:[String],
