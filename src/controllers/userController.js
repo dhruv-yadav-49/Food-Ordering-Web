@@ -3,9 +3,8 @@ const userService = require("../service/userService");
 module.exports = {
     getUserProfileHandler: async (req,res) =>{
         try{
-            const jwt= req.header.authorization?.split(' ')[1];
 
-            const user = await userService.findUserProfileByJwt(jwt);
+            const user=req.user;
             user.password = null;
             res.status(200).json(user);
         }
