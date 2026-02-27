@@ -2,9 +2,7 @@ const Address = require("../models/address.model.js");
 const Order = require("../models/order.model.js");
 const OrderItem = require("../models/orderItem.model.js");
 const Restaurant = require("../models/restaurant.model.js");
-const cartService = require("./cartsService.js");
-const paymentService = require("./paymentService.js");
-const userService = require("./userService.js");
+
 module.exports = {
     async createOrder(order, user) {
         try {

@@ -21,4 +21,13 @@ app.use("/api/restaurants", restaurantRoutes);
 app.use("/api/food", foodRoutes);
 app.use("/api/cart", cartRoutes);
 
+const userRoutes=require("./routes/userRoutes.js");
+app.use("/api/users",userRoutes);
+
+const orderRoutes=require("./routes/orderRoutes.js");
+app.use("/api/order",orderRoutes);
+
+const menuItemRoutes=require("./routes/menuItemRoutes.js");
+app.use("/api/food",menuItemRoutes);
+
 module.exports = {app};
