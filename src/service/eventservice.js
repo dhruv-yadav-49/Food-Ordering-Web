@@ -1,5 +1,7 @@
+const { findRestaurantsEvents } = require("../controllers/eventController.js");
 const Events = require("../models/event.model.js");
 const Restaurant = require("../models/restaurant.model.js");
+const { events } = require("../models/user.model.js");
 
 module.exports = {
     async createEvent(event, restaurantId){
@@ -34,6 +36,18 @@ module.exports = {
             throw new Error(`Failed to find all events: ${error.message}`);
         }
     },
+    
+    async findRestaurantsEvents(restaurantId){
+        try{
+            const event = await Events.findById( { restaurant: restaurantId});
+            return events;
+        }
+        catch(error){
+            throw new Error(`Failed to find event for restaurant ID ${restaurantId}: ${error.message}`);
+        }
+    },
+
+
     async findById(id){
         try{
             const event = await Events.findById(id);
